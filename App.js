@@ -4,46 +4,10 @@ import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, View, TextInput, ScrollView } from "react-native";
 import HomeStack from "./screens/Home/HomeStack";
 import SearchScreen from "./screens/Search/SearchScreen";
+import FavoritesScreen from "./screens/Favorites/FavoritesScreen";
 
 const Tab = createBottomTabNavigator();
-
-// Trang chủ
-function HomeScreen() {
-  return (
-    <ScrollView contentContainerStyle={styles.screenContainer}>
-      <Text style={styles.heading}>🔥 Mẫu đang thịnh hành</Text>
-      <View style={styles.box}>
-        <Text>Mẫu 1</Text>
-      </View>
-      <View style={styles.box}>
-        <Text>Mẫu 2</Text>
-      </View>
-
-      <Text style={styles.heading}>🌟 Người nổi tiếng sử dụng</Text>
-      <View style={styles.box}>
-        <Text>Jennie BLACKPINK</Text>
-      </View>
-      <View style={styles.box}>
-        <Text>Lisa</Text>
-      </View>
-    </ScrollView>
-  );
-}
-
 // Yêu thích
-function FavoritesScreen() {
-  return (
-    <View style={styles.screenContainer}>
-      <Text style={styles.heading}>❤️ Danh sách mẫu đã lưu</Text>
-      <View style={styles.box}>
-        <Text>Mẫu bạn thích 1</Text>
-      </View>
-      <View style={styles.box}>
-        <Text>Mẫu bạn thích 2</Text>
-      </View>
-    </View>
-  );
-}
 
 // Thông tin tài khoản
 function ProfileScreen() {
