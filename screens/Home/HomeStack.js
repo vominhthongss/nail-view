@@ -8,6 +8,7 @@ import {
   Image,
   ScrollView,
 } from "react-native";
+import { celebrities, hots, themes, trends } from "../../mock/nails";
 
 const Stack = createNativeStackNavigator();
 
@@ -47,7 +48,7 @@ const HomeMainScreen = ({ navigation }) => {
       </View>
       <ScrollView style={{ padding: 10, marginTop: 120 }}>
         <FlatList
-          data={gridData("Trang chủ")}
+          data={hots}
           keyExtractor={(item) => item.id.toString()}
           numColumns={2}
           scrollEnabled={false}
@@ -61,7 +62,7 @@ const HomeMainScreen = ({ navigation }) => {
                   resizeMode: "cover",
                 }}
                 source={{
-                  uri: "https://www.shutterstock.com/image-photo/glamorous-nail-art-closeup-red-600nw-2559156227.jpg",
+                  uri: item.uri,
                 }}
               />
               <Text>{item.name}</Text>
@@ -80,12 +81,12 @@ const gridData = (prefix) =>
   }));
 
 const GridScreen = ({ route }) => {
-  const { title, prefix } = route.params;
+  const { title, prefix, data } = route.params;
   return (
     <View style={{ padding: 10, marginTop: 20 }}>
       <Text style={styles.heading}>{title}</Text>
       <FlatList
-        data={gridData(prefix)}
+        data={data}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
         renderItem={({ item }) => (
@@ -98,7 +99,7 @@ const GridScreen = ({ route }) => {
                 resizeMode: "cover",
               }}
               source={{
-                uri: "https://www.shutterstock.com/image-photo/glamorous-nail-art-closeup-red-600nw-2559156227.jpg",
+                uri: item.uri,
               }}
             />
             <Text>{item.name}</Text>
@@ -120,17 +121,25 @@ export default function HomeStack() {
       <Stack.Screen
         name="XuHướng"
         component={GridScreen}
-        initialParams={{ title: "🔥 Xu hướng", prefix: "XuHướng" }}
+        initialParams={{
+          title: "🔥 Xu hướng",
+          prefix: "XuHướng",
+          data: trends,
+        }}
       />
       <Stack.Screen
         name="Chủ đề"
         component={GridScreen}
-        initialParams={{ title: "🎨 Chủ đề", prefix: "Chủ đề" }}
+        initialParams={{ title: "🎨 Chủ đề", prefix: "Chủ đề", data: themes }}
       />
       <Stack.Screen
         name="Người nổi"
         component={GridScreen}
-        initialParams={{ title: "🌟 Người nổi tiếng", prefix: "Nổi tiếng" }}
+        initialParams={{
+          title: "🌟 Người nổi tiếng",
+          prefix: "Nổi tiếng",
+          data: celebrities,
+        }}
       />
     </Stack.Navigator>
   );
