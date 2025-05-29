@@ -2,9 +2,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, View, TextInput, ScrollView } from "react-native";
-import HomeStack from "./HomeStack"; 
-import VariantInput from "./components/variant-input"; 
-
+import HomeStack from "./HomeStack";
+import VariantInput from "./components/variant-input";
 
 const Tab = createBottomTabNavigator();
 
@@ -13,12 +12,20 @@ function HomeScreen() {
   return (
     <ScrollView contentContainerStyle={styles.screenContainer}>
       <Text style={styles.heading}>🔥 Mẫu đang thịnh hành</Text>
-      <View style={styles.box}><Text>Mẫu 1</Text></View>
-      <View style={styles.box}><Text>Mẫu 2</Text></View>
+      <View style={styles.box}>
+        <Text>Mẫu 1</Text>
+      </View>
+      <View style={styles.box}>
+        <Text>Mẫu 2</Text>
+      </View>
 
       <Text style={styles.heading}>🌟 Người nổi tiếng sử dụng</Text>
-      <View style={styles.box}><Text>Jennie BLACKPINK</Text></View>
-      <View style={styles.box}><Text>Lisa</Text></View>
+      <View style={styles.box}>
+        <Text>Jennie BLACKPINK</Text>
+      </View>
+      <View style={styles.box}>
+        <Text>Lisa</Text>
+      </View>
     </ScrollView>
   );
 }
@@ -31,7 +38,7 @@ function SearchScreen() {
         label="Tìm mẫu nail"
         type="text"
         value={""}
-        onChange={()=>{}}
+        onChange={() => {}}
         placeholder="Lấp lánh, hồng nhạt,..."
       />
       <Text style={styles.heading}>Bộ lọc:</Text>
@@ -45,8 +52,12 @@ function FavoritesScreen() {
   return (
     <View style={styles.screenContainer}>
       <Text style={styles.heading}>❤️ Danh sách mẫu đã lưu</Text>
-      <View style={styles.box}><Text>Mẫu bạn thích 1</Text></View>
-      <View style={styles.box}><Text>Mẫu bạn thích 2</Text></View>
+      <View style={styles.box}>
+        <Text>Mẫu bạn thích 1</Text>
+      </View>
+      <View style={styles.box}>
+        <Text>Mẫu bạn thích 2</Text>
+      </View>
     </View>
   );
 }
@@ -72,10 +83,18 @@ export default function App() {
           tabBarIcon: ({ color, size }) => {
             let iconName;
             switch (route.name) {
-              case "Trang chủ": iconName = "home-outline"; break;
-              case "Tìm kiếm": iconName = "search-outline"; break;
-              case "Yêu thích": iconName = "heart-outline"; break;
-              case "Tài khoản": iconName = "person-outline"; break;
+              case "Trang chủ":
+                iconName = "home-outline";
+                break;
+              case "Tìm kiếm":
+                iconName = "search-outline";
+                break;
+              case "Yêu thích":
+                iconName = "heart-outline";
+                break;
+              case "Tài khoản":
+                iconName = "person-outline";
+                break;
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
