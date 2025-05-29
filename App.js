@@ -1,25 +1,13 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, Text, View, TextInput, ScrollView } from "react-native";
+import { StyleSheet } from "react-native";
 import HomeStack from "./screens/Home/HomeStack";
 import SearchScreen from "./screens/Search/SearchScreen";
 import FavoritesScreen from "./screens/Favorites/FavoritesScreen";
+import ProfileScreen from "./screens/Profile/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
-// Yêu thích
-
-// Thông tin tài khoản
-function ProfileScreen() {
-  return (
-    <View style={styles.screenContainer}>
-      <Text style={styles.heading}>👤 Thông tin cá nhân</Text>
-      <Text>Tên: naillover_01</Text>
-      <Text>Số mẫu đã lưu: 8</Text>
-      <Text>Cài đặt: ngôn ngữ, chủ đề giao diện</Text>
-    </View>
-  );
-}
 
 // App chính
 export default function App() {
