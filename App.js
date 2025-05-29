@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, View, TextInput, ScrollView } from "react-native";
+import HomeStack from "./HomeStack"; 
 
 
 const Tab = createBottomTabNavigator();
@@ -77,7 +78,7 @@ export default function App() {
           headerShown: false,
         })}
       >
-        <Tab.Screen name="Trang chủ" component={HomeScreen} />
+        <Tab.Screen name="Trang chủ" component={HomeStack} />
         <Tab.Screen name="Tìm kiếm" component={SearchScreen} />
         <Tab.Screen name="Yêu thích" component={FavoritesScreen} />
         <Tab.Screen name="Tài khoản" component={ProfileScreen} />
