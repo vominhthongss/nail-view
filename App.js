@@ -2,8 +2,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, View, TextInput, ScrollView } from "react-native";
-import HomeStack from "./HomeStack";
-import VariantInput from "./components/variant-input";
+import HomeStack from "./screens/Home/HomeStack";
+import SearchScreen from "./screens/Search/SearchScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,23 +27,6 @@ function HomeScreen() {
         <Text>Lisa</Text>
       </View>
     </ScrollView>
-  );
-}
-
-// Tìm kiếm
-function SearchScreen() {
-  return (
-    <View style={styles.screenContainer}>
-      <VariantInput
-        label="Tìm mẫu nail"
-        type="text"
-        value={""}
-        onChange={() => {}}
-        placeholder="Lấp lánh, hồng nhạt,..."
-      />
-      <Text style={styles.heading}>Bộ lọc:</Text>
-      <Text>- Màu sắc / Chủ đề / Người nổi tiếng</Text>
-    </View>
   );
 }
 
@@ -100,7 +83,7 @@ export default function App() {
           },
           tabBarActiveTintColor: "#000",
           tabBarInactiveTintColor: "gray",
-          tabBarStyle: { height: 60, paddingBottom: 5 },
+          tabBarStyle: { height: 80, paddingBottom: 20 },
           headerShown: false,
         })}
       >
