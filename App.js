@@ -1,55 +1,113 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import VariantButton from "./components/variant-button";
-import VariantInput from "./components/variant-input";
-import { useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
+import { StyleSheet, Text, View, TextInput, ScrollView } from "react-native";
 
-export default function App() {
-  const [name, setName] = useState("");
-  const [birthDate, setBirthDate] = useState(null);
-  const [password, setPassword] = useState("");
 
-  const handlePress = () => {
-    alert("Đã nhấn nút Apple!");
-  };
+const Tab = createBottomTabNavigator();
 
+// Trang chủ
+function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text>Đây là app xem nail tuyệt vời</Text>
-      <VariantButton title="Tiếp tục" onPress={handlePress} />
-      <VariantInput
-        label="Họ và tên"
-        type="text"
-        value={name}
-        onChange={setName}
-        placeholder="Nhập họ và tên"
-      />
+    <ScrollView contentContainerStyle={styles.screenContainer}>
+      <Text style={styles.heading}>🔥 Mẫu đang thịnh hành</Text>
+      <View style={styles.box}><Text>Mẫu 1</Text></View>
+      <View style={styles.box}><Text>Mẫu 2</Text></View>
 
-      <VariantInput
-        label="Mật khẩu"
-        type="password"
-        value={password}
-        onChange={setPassword}
-        placeholder="••••••"
-      />
+      <Text style={styles.heading}>🌟 Người nổi tiếng sử dụng</Text>
+      <View style={styles.box}><Text>Jennie BLACKPINK</Text></View>
+      <View style={styles.box}><Text>Lisa</Text></View>
+    </ScrollView>
+  );
+}
 
-      <VariantInput
-        label="Ngày sinh"
-        type="date"
-        value={birthDate}
-        onChange={setBirthDate}
-        placeholder="Chọn ngày sinh"
-      />
-      <StatusBar style="auto" />
+// Tìm kiếm
+function SearchScreen() {
+  return (
+    <View style={styles.screenContainer}>
+      <TextInput style={styles.searchBox} placeholder="Tìm mẫu nail..." />
+      <Text style={styles.heading}>Bộ lọc:</Text>
+      <Text>- Màu sắc / Chủ đề / Người nổi tiếng</Text>
     </View>
   );
 }
 
+// Yêu thích
+function FavoritesScreen() {
+  return (
+    <View style={styles.screenContainer}>
+      <Text style={styles.heading}>❤️ Danh sách mẫu đã lưu</Text>
+      <View style={styles.box}><Text>Mẫu bạn thích 1</Text></View>
+      <View style={styles.box}><Text>Mẫu bạn thích 2</Text></View>
+    </View>
+  );
+}
+
+// Thông tin tài khoản
+function ProfileScreen() {
+  return (
+    <View style={styles.screenContainer}>
+      <Text style={styles.heading}>👤 Thông tin cá nhân</Text>
+      <Text>Tên: naillover_01</Text>
+      <Text>Số mẫu đã lưu: 8</Text>
+      <Text>Cài đặt: ngôn ngữ, chủ đề giao diện</Text>
+    </View>
+  );
+}
+
+// App chính
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ color, size }) => {
+            let iconName;
+            switch (route.name) {
+              case "Trang chủ": iconName = "home-outline"; break;
+              case "Tìm kiếm": iconName = "search-outline"; break;
+              case "Yêu thích": iconName = "heart-outline"; break;
+              case "Tài khoản": iconName = "person-outline"; break;
+            }
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: "#000",
+          tabBarInactiveTintColor: "gray",
+          tabBarStyle: { height: 60, paddingBottom: 5 },
+          headerShown: false,
+        })}
+      >
+        <Tab.Screen name="Trang chủ" component={HomeScreen} />
+        <Tab.Screen name="Tìm kiếm" component={SearchScreen} />
+        <Tab.Screen name="Yêu thích" component={FavoritesScreen} />
+        <Tab.Screen name="Tài khoản" component={ProfileScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+  screenContainer: {
+    flexGrow: 1,
+    padding: 20,
+    paddingTop: 50,
+  },
+  heading: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginVertical: 15,
+  },
+  box: {
+    backgroundColor: "#f1f1f1",
+    padding: 15,
+    marginBottom: 10,
+    borderRadius: 10,
+  },
+  searchBox: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 20,
   },
 });
