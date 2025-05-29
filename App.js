@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, View, TextInput, ScrollView } from "react-native";
 import HomeStack from "./HomeStack"; 
+import VariantInput from "./components/variant-input"; 
 
 
 const Tab = createBottomTabNavigator();
@@ -26,7 +27,13 @@ function HomeScreen() {
 function SearchScreen() {
   return (
     <View style={styles.screenContainer}>
-      <TextInput style={styles.searchBox} placeholder="Tìm mẫu nail..." />
+      <VariantInput
+        label="Tìm mẫu nail"
+        type="text"
+        value={""}
+        onChange={()=>{}}
+        placeholder="Lấp lánh, hồng nhạt,..."
+      />
       <Text style={styles.heading}>Bộ lọc:</Text>
       <Text>- Màu sắc / Chủ đề / Người nổi tiếng</Text>
     </View>
@@ -92,6 +99,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     padding: 20,
     paddingTop: 50,
+    backgroundColor: "#ffffff",
   },
   heading: {
     fontSize: 20,
