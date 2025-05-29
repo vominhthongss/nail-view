@@ -1,26 +1,83 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { View, Text, TouchableOpacity, FlatList, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  Image,
+  ScrollView,
+} from "react-native";
 
 const Stack = createNativeStackNavigator();
 
 const HomeMainScreen = ({ navigation }) => {
   return (
-    <View style={{ padding: 20, marginTop: 30 }}>
-      <Text style={styles.heading}>Chọn loại mẫu:</Text>
-      <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate("XuHướng")}>
-        <Text style={styles.navButtonText}>🔥 Xu hướng</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate("Chủ đề")}>
-        <Text style={styles.navButtonText}>🎨 Chủ đề</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate("Người nổi")}>
-        <Text style={styles.navButtonText}>🌟 Người nổi tiếng</Text>
-      </TouchableOpacity>
+    <View>
+      <View
+        style={{
+          padding: 10,
+          marginTop: 30,
+          position: "absolute",
+          zIndex: 1,
+          backgroundColor: "#f2f2f2",
+        }}
+      >
+        <Text style={styles.heading}>Chọn loại mẫu:</Text>
+        <View style={{ display: "flex", flexDirection: "row" }}>
+          <TouchableOpacity
+            style={styles.navButton}
+            onPress={() => navigation.navigate("XuHướng")}
+          >
+            <Text style={styles.navButtonText}>🔥 Xu hướng</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.navButton}
+            onPress={() => navigation.navigate("Chủ đề")}
+          >
+            <Text style={styles.navButtonText}>🎨 Chủ đề</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.navButton}
+            onPress={() => navigation.navigate("Người nổi")}
+          >
+            <Text style={styles.navButtonText}>🌟 Người nổi tiếng</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <ScrollView style={{ padding: 10, marginTop: 120 }}>
+        <FlatList
+          data={gridData("Trang chủ")}
+          keyExtractor={(item) => item.id.toString()}
+          numColumns={2}
+          scrollEnabled={false}
+          renderItem={({ item }) => (
+            <View style={styles.gridBox}>
+              <Image
+                style={{
+                  flex: 1,
+                  width: 200,
+                  height: 200,
+                  resizeMode: "cover",
+                }}
+                source={{
+                  uri: "https://www.shutterstock.com/image-photo/glamorous-nail-art-closeup-red-600nw-2559156227.jpg",
+                }}
+              />
+              <Text>{item.name}</Text>
+            </View>
+          )}
+        />
+      </ScrollView>
     </View>
   );
 };
 
-const gridData = (prefix) => Array.from({ length: 8 }, (_, i) => ({ id: i + 1, name: `${prefix} ${i + 1}` }));
+const gridData = (prefix) =>
+  Array.from({ length: 8 }, (_, i) => ({
+    id: i + 1,
+    name: `${prefix} ${i + 1}`,
+  }));
 
 const GridScreen = ({ route }) => {
   const { title, prefix } = route.params;
@@ -33,6 +90,17 @@ const GridScreen = ({ route }) => {
         numColumns={2}
         renderItem={({ item }) => (
           <View style={styles.gridBox}>
+            <Image
+              style={{
+                flex: 1,
+                width: 200,
+                height: 200,
+                resizeMode: "cover",
+              }}
+              source={{
+                uri: "https://www.shutterstock.com/image-photo/glamorous-nail-art-closeup-red-600nw-2559156227.jpg",
+              }}
+            />
             <Text>{item.name}</Text>
           </View>
         )}
@@ -44,10 +112,26 @@ const GridScreen = ({ route }) => {
 export default function HomeStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="HomeMain" component={HomeMainScreen} options={{ title: "Trang chủ" }} />
-      <Stack.Screen name="XuHướng" component={GridScreen} initialParams={{ title: "🔥 Xu hướng", prefix: "XuHướng" }} />
-      <Stack.Screen name="Chủ đề" component={GridScreen} initialParams={{ title: "🎨 Chủ đề", prefix: "Chủ đề" }} />
-      <Stack.Screen name="Người nổi" component={GridScreen} initialParams={{ title: "🌟 Người nổi tiếng", prefix: "Nổi tiếng" }} />
+      <Stack.Screen
+        name="HomeMain"
+        component={HomeMainScreen}
+        options={{ title: "Trang chủ" }}
+      />
+      <Stack.Screen
+        name="XuHướng"
+        component={GridScreen}
+        initialParams={{ title: "🔥 Xu hướng", prefix: "XuHướng" }}
+      />
+      <Stack.Screen
+        name="Chủ đề"
+        component={GridScreen}
+        initialParams={{ title: "🎨 Chủ đề", prefix: "Chủ đề" }}
+      />
+      <Stack.Screen
+        name="Người nổi"
+        component={GridScreen}
+        initialParams={{ title: "🌟 Người nổi tiếng", prefix: "Nổi tiếng" }}
+      />
     </Stack.Navigator>
   );
 }
